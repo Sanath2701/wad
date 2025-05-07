@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Internal CSS -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    #sidebar {
+      width: 250px;
+      background-color: #343a40;
+      color: white;
+      padding: 20px;
+    }
+
+    #sidebar h3 {
+      font-size: 1.5rem;
+    }
+
+    #sidebar .nav-link {
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    #sidebar .nav-link:hover {
+      background-color: #495057;
+      border-radius: 5px;
+    }
+
+    #content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .card {
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <h3>Dashboard</h3>
+      <ul class="nav flex-column mt-4">
+        <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Users</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Exams</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Settings</a></li>
+      </ul>
+    </div>
+
+    <!-- Page Content -->
+    <div id="content">
+      <h2>Welcome Admin</h2>
+      <div class="row mt-4">
+        <div class="col-md-4">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Total Students</h5>
+              <p class="card-text">1500</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Exams Conducted</h5>
+              <p class="card-text">25</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Pending Results</h5>
+              <p class="card-text">5</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+
+##Impoirtant commnadss
+vagrant init ubuntu/bionic64
+remove the cinfigure from # cinfig vagrant fileee and save the filee
+vagrant up
+
+et up Apache in Ubuntu VM
+SSH into the VM:
+
+vagrant ssh
+Update packages:
+
+sudo apt update
+Install Apache:
+
+sudo apt install apache2 -y
+From inside the VM, run:
+
+sudo cp /vagrant/index.html /var/www/html/index.html
+Set correct permissions (optional):
+
+sudo chmod 644 /var/www/html/index.html
+
+On your Windows host, open a browser.
+
+Go to:
+
+http://localhost:8080/index.html
