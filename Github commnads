@@ -5,7 +5,7 @@ Then create repositiyu ij git
 
 git remote add origin "https:gtb.com/santh"
 git branch -M main
-git push -u origin
+git push -u origin main
 
 to add readme
 create README.md file
