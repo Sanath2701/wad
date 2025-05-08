@@ -1,0 +1,32 @@
+cd downloads
+
+ssh -i \key.pem ec2-user@ipv4 adress
+
+sudo yum update
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+first delete the default html file
+
+sudo rm -rf /var/www/html/*
+
+then create new one
+
+sudo nano /var/www/html/index.html
+
+and paste
+
+
+<!DOCTYPE html>
+<html>
+<head><title>My EC2 Website</title></head>
+<body>
+  <h1>Hello, EC2 World!</h1>
+  <p>This is my custom website hosted on Amazon EC2 with Apache.</p>
+</body>
+</html>
+
+Cntrl o enter cntrl x
+
+http://ipddress
