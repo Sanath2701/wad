@@ -1,0 +1,15 @@
+git init
+git add index.html
+git commit -m " Initial Commit:"
+Then create repositiyu ij git
+
+git remote add origin "https:gtb.com/santh"
+git branch -M main
+git push -u origin
+
+to add readme
+create README.md file
+
+git add README.md
+git commit -m" Inital readme added"
+git push
