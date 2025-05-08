@@ -1,0 +1,7 @@
+cd downloads
+ssh -i .\key.pem ubuntu@ipv4 ipdresss
+
+sudo apt update
+sudo apt install apache2 -y
+sudo systemctl start apache2
+sudo systemctl enable apache2
