@@ -1,3 +1,15 @@
+vagrant init ubuntu/bionic64
+vagrant up
+
+
+sudo apt install vagrant
+sudo apt update
+sudo apt install apache2 -y
+
+sudo cp /vagrant/register.html /var/www/html/
+sudo cp /vagrant/user.html /var/www/html/
+
+
 #registr.html
 
 <!DOCTYPE html>
