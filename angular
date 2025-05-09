@@ -1,0 +1,201 @@
+npm init -g @angular/cli
+
+ng new user-auth-app
+npm install @angular/forms
+
+
+ng g c register
+ng g c login
+ng g c profile
+ng g s auth
+
+app-routing.module.ts
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+
+const routes: Routes = [
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
+
+
+app.component.html
+
+include a router outlet
+
+<router-outlet></router-outlet>
+
+
+register.component.ts
+
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
+})
+export class RegisterComponent {
+  username: string = '';
+  email: string = '';
+  password: string = '';
+
+  constructor(private router: Router) {}
+
+  register() {
+    if (this.username && this.email && this.password) {
+      localStorage.setItem('user', JSON.stringify({
+        username: this.username,
+        email: this.email
+      }));
+      this.router.navigate(['/profile']);
+    } else {
+      alert('Please fill in all fields!');
+    }
+  }
+}
+
+register.component.html
+
+<h2>Register</h2>
+<form (ngSubmit)="register()">
+  <label for="username">Username</label>
+  <input type="text" [(ngModel)]="username" name="username" required />
+
+  <label for="email">Email</label>
+  <input type="email" [(ngModel)]="email" name="email" required />
+
+  <label for="password">Password</label>
+  <input type="password" [(ngModel)]="password" name="password" required />
+
+  <button type="submit">Register</button>
+</form>
+
+login.component.ts
+
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+  email: string = '';
+  password: string = '';
+
+  constructor(private router: Router) {}
+
+  login() {
+    const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+    if (storedUser.email === this.email && this.password) {
+      this.router.navigate(['/profile']);
+    } else {
+      alert('Invalid credentials');
+    }
+  }
+}
+
+login.component.html
+
+<h2>Login</h2>
+<form (ngSubmit)="login()">
+  <label for="email">Email</label>
+  <input type="email" [(ngModel)]="email" name="email" required />
+
+  <label for="password">Password</label>
+  <input type="password" [(ngModel)]="password" name="password" required />
+
+  <button type="submit">Login</button>
+</form>
+
+
+
+profile.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
+})
+export class ProfileComponent implements OnInit {
+  user: any;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!this.user.username) {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+  }
+}
+
+profile.component.html
+
+<h2>Welcome, {{ user.username }}!</h2>
+<p>Email: {{ user.email }}</p>
+<button (click)="logout()">Logout</button>
+
+run
+ng serve 
+
+http://localhost:4200:reigster/login/prfile
+
+Google cloud
+
+ng build --prod
+
+ create a doxkerfilee
+
+# Step 1: Build the Angular app
+FROM node:16 AS build
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build --prod
+
+# Step 2: Serve the app using Nginx
+FROM nginx:alpine
+COPY --from=build /app/dist/user-auth-app /usr/share/nginx/html
+
+
+Build and deploy with Google Cloud CLI:
+
+Install Google Cloud SDK.
+
+Authenticate and deploy:
+
+bash
+Copy
+Edit
+gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
+gcloud app deploy
+
+
+
+
