@@ -1,0 +1,5 @@
+docker pull python
+docker run -it python
+
+docker pull openjdk
+docker run -t openjdk
