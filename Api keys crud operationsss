@@ -1,0 +1,101 @@
+npm init -y
+npm install express mongoose body-parser cors
+
+models
+/User.js
+
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: { type: String, unique: true },
+  age: Number
+});
+
+module.exports = mongoose.model('User', userSchema);
+
+routes
+/userRoutes.js
+
+const express = require('express');
+const router = express.Router();
+const User = require('../models/User');
+
+// CREATE
+router.post('/users', async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.status(201).send(user);
+  } catch (err) {
+    res.status(400).send({ error: err.message });
+  }
+});
+
+// READ
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.send(users);
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
+// UPDATE
+router.put('/users/:id', async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.send(updatedUser);
+  } catch (err) {
+    res.status(400).send({ error: err.message });
+  }
+});
+
+// DELETE
+router.delete('/users/:id', async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.send({ message: 'User deleted successfully' });
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
+module.exports = router;
+
+
+server.js
+
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const userRoutes = require('./routes/userRoutes');
+
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+// MongoDB connection
+mongoose.connect('mongodb://127.0.0.1:27017/userDB', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => console.log('MongoDB connected'))
+  .catch(err => console.error(err));
+
+// Use routes
+app.use('/api', userRoutes);
+
+// Start server
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
