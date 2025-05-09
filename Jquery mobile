@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I²IT College Mobile Site</title>
+</head>
+<body>
+     <!-- Home Page -->
+  <div data-role="page" id="home">
+    <div data-role="header">
+      <h1>I²IT College</h1>
+    </div>
+
+    <div data-role="content">
+      <p>Welcome to the official mobile site of I²IT Pune!</p>
+      <a href="#about" class="ui-btn">About I²IT</a>
+      <a href="#departments" class="ui-btn">Departments</a>
+      <a href="#contact" class="ui-btn">Contact</a>
+    </div>
+
+    <div data-role="footer">
+      <h4>&copy; I²IT Pune</h4>
+    </div>
+  </div>
+
+  <!-- About Page -->
+  <div data-role="page" id="about">
+    <div data-role="header">
+      <h1>About I²IT</h1>
+    </div>
+
+    <div data-role="content">
+        <img src="i2it.jpg" alt="I²IT Campus">
+      <p>I²IT (International Institute of Information Technology) is a premier engineering college in Pune offering courses in Computer, IT, and E&TC.</p>
+      <a href="#home" class="ui-btn">Back to Home</a>
+    </div>
+
+    <div data-role="footer">
+      <h4>I²IT Pune</h4>
+    </div>
+  </div>
+
+  <!-- Departments Page -->
+  <div data-role="page" id="departments">
+    <div data-role="header">
+      <h1>Departments</h1>
+    </div>
+
+    <div data-role="content">
+      <ul data-role="listview">
+        <li>Computer Engineering</li>
+        <li>Information Technology</li>
+        <li>Electronics & Telecom</li>
+      </ul>
+      <a href="#home" class="ui-btn">Back to Home</a>
+    </div>
+
+    <div data-role="footer">
+      <h4>I²IT Pune</h4>
+    </div>
+  </div>
+
+  <!-- Contact Page -->
+  <div data-role="page" id="contact">
+    <div data-role="header">
+      <h1>Contact</h1>
+    </div>
+
+    <div data-role="content">
+      <p>Email: info@isquareit.edu.in</p>
+      <p>Phone: +91-20-22933441</p>
+      <a href="#home" class="ui-btn">Back to Home</a>
+    </div>
+
+    <div data-role="footer">
+      <h4>I²IT Pune</h4>
+    </div>
+  </div>
+
+</body>
+</html>
+</body>
+</html>
